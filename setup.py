@@ -14,5 +14,4 @@ setup(
     url="https://github.com/Edinburgh-Genome-Foundry/Dioscuri",
     keywords="biology",
     packages=find_packages(exclude="docs"),
-    install_requires=["biopython"],
 )
