@@ -1,3 +1,8 @@
+<p align="center">
+<img alt="Dioscuri logo" title="Dioscuri" src="https://raw.githubusercontent.com/Edinburgh-Genome-Foundry/Dioscuri/master/images/Dioscuri.png" width="140">
+</p>
+
+
 # Dioscuri
 
 Dioscuri is a Python package for working with **Gemini WorkList** (gwl) files and objects.
