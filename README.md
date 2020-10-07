@@ -19,14 +19,14 @@ pip install dioscuri
 ```python
 import dioscuri
 
-aspirate = dioscuri.Pipette(type="Aspirate",
+aspirate = dioscuri.Pipette(operation="Aspirate",
                             rack_label="Source1",
                             rack_type="4ti-0960/B on raised carrier",
                             position="3",
                             volume="50")
 aspirate.to_string()
 
-dispense = dioscuri.Pipette(type="D",
+dispense = dioscuri.Pipette(operation="D",
                             rack_label="Destination",
                             rack_type="4ti-0960/B on CPAC",
                             position="1", 

@@ -59,13 +59,14 @@ class GeminiWorkList:
 class Pipette:
     """General class for Aspirate and Dispense records.
 
-    A record consists of a single character indicating the type, and one or
-    more 'parameters'. Note that parameter MinDetectedVolume is not implemented.
+    A record consists of a single character indicating the operation type, and
+    one or more 'parameters'. Note that parameter MinDetectedVolume is not
+    implemented.
 
 
     **Parameters**
 
-    **type**
+    **operation**
     > The type of the transfer (`str`): `A` for aspirate, or `D` for dispense.
 
     **rack_label**
@@ -103,7 +104,7 @@ class Pipette:
 
     def __init__(
         self,
-        type,
+        operation,
         rack_label,
         rack_type,
         position,
@@ -115,7 +116,7 @@ class Pipette:
         forced_rack_type="",
     ):
 
-        self.type_character = type[0]
+        self.type_character = operation[0]
 
         # Parameters:
         self.rack_label = rack_label
