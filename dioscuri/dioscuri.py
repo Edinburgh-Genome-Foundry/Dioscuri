@@ -14,14 +14,13 @@ class GeminiWorkList:
     A WorkList is a list of pipetting commands, or 'records'.
 
 
-    Parameters
-    ==========
+    **Parameters**
 
-    name
-      str name of the worklist.
+    **name**
+    > name of the worklist (`str`).
 
-    records
-      list of records (Pipette class instances).
+    **records**
+    > `list` of records (Pipette class instances).
     """
 
     def __init__(self, name="worklist", records=None):
@@ -32,6 +31,14 @@ class GeminiWorkList:
             self.records = records
 
     def add_record(self, record):
+        """Add record.
+
+
+        **Parameters**
+
+        **record**
+        > `Pipette`
+        """
         self.records.append(record)
 
     def list_records(self):
@@ -56,43 +63,42 @@ class Pipette:
     more 'parameters'. Note that parameter MinDetectedVolume is not implemented.
 
 
-    Parameters
-    ==========
+    **Parameters**
 
-    type
-      str the type of the transfer: 'A' for aspirate, or 'D' for dispense.
+    **type**
+    > The type of the transfer (`str`): `A` for aspirate, or `D` for dispense.
 
-    rack_label
-      str label (name) which is assigned to the labware. Maximum 32 characters.
+    **rack_label**
+    > Label (`str`) which is assigned to the labware. Maximum 32 characters.
 
-    rack_id
-      str labware barcode. Maximum 32 characters.
+    **rack_id**
+    > Labware barcode (`str`). Maximum 32 characters.
 
-    rack_type
-      str labware type (configuration name), for example "384 Well, landscape".
-      Maximum 32 characters.
+    **rack_type**
+    > Labware type (`str`): configuration name, for example "384 Well,
+    landscape". Maximum 32 characters.
 
-    position
-      int well position in the labware. The position starts with 1 and increases
-      from rear to front and left to right. Range: 1 .. number of wells.
+    **position**
+    > Well position in the labware (`int`). The position starts with 1 and
+    increases from rear to front and left to right. Range: 1 .. number of wells.
 
-    tube_id
-      str tube barcode. Maximum 32 characters.
+    **tube_id**
+    > Tube barcode (`str`). Maximum 32 characters.
 
-    volume
-      int pipetting volume in µl (microliter). Range: 0 .. +7158278.
+    **volume**
+    > Pipetting volume (`int`) in µl (microliter). Range: 0 .. 7158278.
 
-    liquid_class
-      str. Optional. Overwrites the liquid class specified in the Tecan EVOware
-      Worklist command that calls the gwl file. Maximum 32 characters.
+    **liquid_class**
+    > Optional (`str`). Overwrites the liquid class specified in the Tecan
+    EVOware Worklist command that calls the gwl file. Maximum 32 characters.
 
-    tip_mask
-      str. Optional. Specifies the tip you want to use. See details in the
-      program that uses the gwl output file. Range: 1 .. 128.
+    **tip_mask**
+    > Optional (`str`). Specifies the tip you want to use. See details in the
+    program that uses the gwl output file. Range: 1 .. 128.
 
-    forced_rack_type
-      str. Optional. The configuration name of the labware.
-      Maximum 32 characters.
+    **forced_rack_type**
+    > Optional (`str`). The configuration name of the labware.
+    Maximum 32 characters.
     """
 
     def __init__(
@@ -147,12 +153,11 @@ class WashTipOrReplaceDITI:
     """Class for WashTip or ReplaceDITI records.
 
 
-    Parameters
-    ==========
+    **Parameters**
 
-    scheme
-      int number of wash scheme to use. Default None, which uses the first
-      wash scheme.
+    **scheme**
+    > Number (`int`) of wash scheme to use. Default `None`, which uses the
+    first wash scheme.
     """
 
     def __init__(self, scheme=None):
@@ -164,6 +169,7 @@ class WashTipOrReplaceDITI:
         self.type_character = "W"
 
     def to_string(self):
+        """Convert record into string representation."""
         record_as_string = self.type_character + self.scheme + ";"
 
         return record_as_string

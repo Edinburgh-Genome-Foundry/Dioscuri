@@ -19,7 +19,7 @@ pip install dioscuri
 ```python
 import dioscuri
 
-aspirate = dioscuri.Pipette(type="Aspirate", 
+aspirate = dioscuri.Pipette(type="Aspirate",
                             rack_label="Source1",
                             rack_type="4ti-0960/B on raised carrier",
                             position="3",
