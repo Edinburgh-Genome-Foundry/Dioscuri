@@ -5,6 +5,8 @@
 
 # Dioscuri
 
+[![Build Status](https://travis-ci.org/Edinburgh-Genome-Foundry/Dioscuri.svg?branch=main)](https://travis-ci.org/Edinburgh-Genome-Foundry/Dioscuri)
+
 Dioscuri is a Python package for working with **Gemini WorkList** (gwl) files and objects.
 
 A Gemini worklist file is a text file that contains pipetting instructions for the Tecan Freedom EVO robots. Dioscuri uses the Freedom EVOware (v2.7) software's specification of the gwl format.
