@@ -424,7 +424,13 @@
                   
                 
                 
-                <h1 id="dioscuri">Dioscuri</h1>
+                <p align="center">
+<img alt="Dioscuri logo" title="Dioscuri" src="https://raw.githubusercontent.com/Edinburgh-Genome-Foundry/Dioscuri/main/images/Dioscuri.png" width="140">
+</p>
+
+<h1 id="dioscuri">Dioscuri</h1>
+<p><a href="https://travis-ci.org/Edinburgh-Genome-Foundry/Dioscuri"><img alt="Build Status" src="https://travis-ci.org/Edinburgh-Genome-Foundry/Dioscuri.svg?branch=main" /></a>
+<a href="https://coveralls.io/github/Edinburgh-Genome-Foundry/Dioscuri?branch=main"><img alt="Coverage Status" src="https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/Dioscuri/badge.svg?branch=main" /></a></p>
 <p>Dioscuri is a Python package for working with <strong>Gemini WorkList</strong> (gwl) files and objects.</p>
 <p>A Gemini worklist file is a text file that contains pipetting instructions for the Tecan Freedom EVO robots. Dioscuri uses the Freedom EVOware (v2.7) software's specification of the gwl format.</p>
 <p><em>Dioscuri</em> is a name for Castor and Pollux, the twins who were transformed into the Gemini constellation in Greek mythology.</p>
@@ -436,14 +442,14 @@
 <h2 id="usage">Usage</h2>
 <div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">dioscuri</span>
 
-<span class="n">aspirate</span> <span class="o">=</span> <span class="n">dioscuri</span><span class="o">.</span><span class="n">Pipette</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;Aspirate&quot;</span><span class="p">,</span>
+<span class="n">aspirate</span> <span class="o">=</span> <span class="n">dioscuri</span><span class="o">.</span><span class="n">Pipette</span><span class="p">(</span><span class="n">operation</span><span class="o">=</span><span class="s2">&quot;Aspirate&quot;</span><span class="p">,</span>
                             <span class="n">rack_label</span><span class="o">=</span><span class="s2">&quot;Source1&quot;</span><span class="p">,</span>
                             <span class="n">rack_type</span><span class="o">=</span><span class="s2">&quot;4ti-0960/B on raised carrier&quot;</span><span class="p">,</span>
                             <span class="n">position</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">,</span>
                             <span class="n">volume</span><span class="o">=</span><span class="s2">&quot;50&quot;</span><span class="p">)</span>
 <span class="n">aspirate</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span>
 
-<span class="n">dispense</span> <span class="o">=</span> <span class="n">dioscuri</span><span class="o">.</span><span class="n">Pipette</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;D&quot;</span><span class="p">,</span>
+<span class="n">dispense</span> <span class="o">=</span> <span class="n">dioscuri</span><span class="o">.</span><span class="n">Pipette</span><span class="p">(</span><span class="n">operation</span><span class="o">=</span><span class="s2">&quot;D&quot;</span><span class="p">,</span>
                             <span class="n">rack_label</span><span class="o">=</span><span class="s2">&quot;Destination&quot;</span><span class="p">,</span>
                             <span class="n">rack_type</span><span class="o">=</span><span class="s2">&quot;4ti-0960/B on CPAC&quot;</span><span class="p">,</span>
                             <span class="n">position</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> 

@@ -789,13 +789,15 @@ different versioning for manual and software).</p>
 
     <span class="s2">&quot;&quot;&quot;General class for Aspirate and Dispense records.</span>
 
-<span class="s2">    A record consists of a single character indicating the type, and one or</span>
+<span class="s2">    A record consists of a single character indicating the operation type, and</span>
 
-<span class="s2">    more &#39;parameters&#39;. Note that parameter MinDetectedVolume is not implemented.</span>
+<span class="s2">    one or more &#39;parameters&#39;. Note that parameter MinDetectedVolume is not</span>
+
+<span class="s2">    implemented.</span>
 
 <span class="s2">    **Parameters**</span>
 
-<span class="s2">    **type**</span>
+<span class="s2">    **operation**</span>
 
 <span class="s2">    &gt; The type of the transfer (`str`): `A` for aspirate, or `D` for dispense.</span>
 
@@ -851,7 +853,7 @@ different versioning for manual and software).</p>
 
         <span class="n">self</span><span class="p">,</span>
 
-        <span class="n">type</span><span class="p">,</span>
+        <span class="n">operation</span><span class="p">,</span>
 
         <span class="n">rack_label</span><span class="p">,</span>
 
@@ -873,7 +875,7 @@ different versioning for manual and software).</p>
 
     <span class="p">):</span>
 
-        <span class="n">self</span><span class="p">.</span><span class="n">type_character</span> <span class="o">=</span> <span class="n">type</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">type_character</span> <span class="o">=</span> <span class="n">operation</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="c1"># Parameters:</span>
 
@@ -1224,7 +1226,7 @@ different versioning for manual and software).</p>
 </details>
 <h3 id="pipette">Pipette</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Pipette</span><span class="p">(</span>
-    <span class="nb">type</span><span class="p">,</span>
+    <span class="n">operation</span><span class="p">,</span>
     <span class="n">rack_label</span><span class="p">,</span>
     <span class="n">rack_type</span><span class="p">,</span>
     <span class="n">position</span><span class="p">,</span>
@@ -1239,10 +1241,11 @@ different versioning for manual and software).</p>
 
 
 <p>General class for Aspirate and Dispense records.</p>
-<p>A record consists of a single character indicating the type, and one or
-more 'parameters'. Note that parameter MinDetectedVolume is not implemented.</p>
+<p>A record consists of a single character indicating the operation type, and
+one or more 'parameters'. Note that parameter MinDetectedVolume is not
+implemented.</p>
 <p><strong>Parameters</strong></p>
-<p><strong>type</strong></p>
+<p><strong>operation</strong></p>
 <blockquote>
 <p>The type of the transfer (<code>str</code>): <code>A</code> for aspirate, or <code>D</code> for dispense.</p>
 </blockquote>
@@ -1291,13 +1294,15 @@ Maximum 32 characters.</p>
 
     <span class="s2">&quot;&quot;&quot;General class for Aspirate and Dispense records.</span>
 
-<span class="s2">    A record consists of a single character indicating the type, and one or</span>
+<span class="s2">    A record consists of a single character indicating the operation type, and</span>
 
-<span class="s2">    more &#39;parameters&#39;. Note that parameter MinDetectedVolume is not implemented.</span>
+<span class="s2">    one or more &#39;parameters&#39;. Note that parameter MinDetectedVolume is not</span>
+
+<span class="s2">    implemented.</span>
 
 <span class="s2">    **Parameters**</span>
 
-<span class="s2">    **type**</span>
+<span class="s2">    **operation**</span>
 
 <span class="s2">    &gt; The type of the transfer (`str`): `A` for aspirate, or `D` for dispense.</span>
 
@@ -1353,7 +1358,7 @@ Maximum 32 characters.</p>
 
         <span class="n">self</span><span class="p">,</span>
 
-        <span class="n">type</span><span class="p">,</span>
+        <span class="n">operation</span><span class="p">,</span>
 
         <span class="n">rack_label</span><span class="p">,</span>
 
@@ -1375,7 +1380,7 @@ Maximum 32 characters.</p>
 
     <span class="p">):</span>
 
-        <span class="n">self</span><span class="p">.</span><span class="n">type_character</span> <span class="o">=</span> <span class="n">type</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">type_character</span> <span class="o">=</span> <span class="n">operation</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="c1"># Parameters:</span>
 
