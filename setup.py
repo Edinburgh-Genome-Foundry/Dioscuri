@@ -9,7 +9,7 @@ setup(
     version=version["__version__"],
     author="Peter Vegh",
     description="Read/write Gemini WorkList (gwl) files.",
-    long_description=open("README.md").read(),
+    long_description=open("pypi-readme.rst").read(),
     license="MIT",
     url="https://github.com/Edinburgh-Genome-Foundry/Dioscuri",
     keywords="biology",
