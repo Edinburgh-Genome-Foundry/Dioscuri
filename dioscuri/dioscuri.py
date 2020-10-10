@@ -198,7 +198,16 @@ class WashTipOrReplaceDITI:
 
 
 class Decontamination:
-    pass
+    """The Decontamination Wash record."""
+
+    def __init__(self):
+        self.type_character = "WD"
+
+    def to_string(self):
+        """Convert record into string representation."""
+        record_as_string = self.type_character + ";"
+
+        return record_as_string
 
 
 class Flush:

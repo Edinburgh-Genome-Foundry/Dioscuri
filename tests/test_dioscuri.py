@@ -26,6 +26,9 @@ def test_dioscuri():
         dioscuri.WashTipOrReplaceDITI(scheme=5)  # should be between 1--4
     wash = dioscuri.WashTipOrReplaceDITI(scheme=2)
 
+    # DECONTAMINATION
+    assert dioscuri.Decontamination().to_string() == "WD;"
+
     # WORKLIST
     dioscuri.GeminiWorkList()  # defaults
 
