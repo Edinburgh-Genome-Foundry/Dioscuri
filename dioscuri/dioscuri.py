@@ -42,8 +42,17 @@ class GeminiWorkList:
         **record**
         > `Pipette`
         """
-        if not type(record) == Pipette:
-            raise AssertionError("Record type must be class Pipette.")
+        if not type(record) in [
+            Pipette,
+            WashTipOrReplaceDITI,
+            Decontamination,
+            Flush,
+            Break,
+            SetDITIType,
+            Comment,
+            ReagentDistribution,
+        ]:
+            raise AssertionError("Parameter `record` must be a record class.")
         self.records.append(record)
 
     def list_records(self):
