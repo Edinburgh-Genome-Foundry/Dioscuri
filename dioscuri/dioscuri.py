@@ -184,6 +184,8 @@ class WashTipOrReplaceDITI:
         if scheme is None:
             self.scheme = ""
         else:
+            if scheme not in [1, 2, 3, 4]:
+                raise ValueError("Scheme must be between 1 and 4.")
             self.scheme = str(scheme)
 
         self.type_character = "W"

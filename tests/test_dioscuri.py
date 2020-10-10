@@ -22,6 +22,8 @@ def test_dioscuri():
 
     # WASH
     assert dioscuri.WashTipOrReplaceDITI().to_string() == "W;"
+    with pytest.raises(ValueError):
+        dioscuri.WashTipOrReplaceDITI(scheme=5)  # should be between 1--4
     wash = dioscuri.WashTipOrReplaceDITI(scheme=2)
 
     # WORKLIST
