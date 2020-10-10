@@ -7,6 +7,7 @@ from .dioscuri import (
     Break,
     SetDITIType,
     Comment,
+    ReagentDistribution,
 )
 
 from .version import __version__

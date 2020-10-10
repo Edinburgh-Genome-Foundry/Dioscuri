@@ -295,4 +295,124 @@ class Comment:
 
 
 class ReagentDistribution:
-    pass
+    """The Reagent Distribution record.
+
+
+    **Parameters**
+
+    **SrcRackLabel**
+    > Label (`str`) of source labware. Maximum 32 characters.
+
+    **SrcRackID**
+    > Source labware barcode (`str`). Maximum 32 characters.
+
+    **SrcRackType**
+    > Source labware type (`str`): configuration name. Maximum 32 characters.
+
+    **SrcPosStart**
+    > First well to be used in the source labware (`int`). Range: 1 .. number of wells.
+
+    **SrcPosEnd**
+    > Last well to be used in the source labware (`int`). Range: 1 .. number of wells.
+
+    **DestRackLabel**
+    > Label (`str`) of destination labware. Maximum 32 characters.
+
+    **DestRackID**
+    > Destination labware barcode (`str`). Maximum 32 characters.
+
+    **DestRackType**
+    > Destination labware type (`str`): configuration name. Maximum 32 characters.
+
+    **DestPosStart**
+    > First well to be used in the destination labware (`int`).
+    > Range: 1 .. number of wells.
+
+    **DestPosEnd**
+    > Last well to be used in the destination labware (`int`).
+    > Range: 1 .. number of wells.
+
+    **Volume**
+    > Dispense volume (`int`) in the destination labware in μl (microliter).
+    > Range: 0..7158278.
+
+    **LiquidClass**
+    > Optional (`str`). Overwrites the liquid class specified in the Tecan
+    EVOware Worklist command. Maximum 32 characters.
+
+    **NoOfDitiReuses**
+    > Optional (`int`). Maximum number of DiTi reuses allowed
+    > (default 1 = no DiTi reuse).
+
+    **NoOfMultiDisp**
+    > Optional (`int`). Maximum number of dispenses in a multidispense sequence
+    > (default 1 = no multi-dispense).
+
+    **Direction**
+    > Optional (`int`). Pipetting direction
+    > (0 = left to right, 1 = right to left; default = 0).
+
+    **ExcludeDestWell**
+    > Optional (`str`). List of wells in destination labware to be excluded from
+    > pipetting.
+    """
+
+    def __init__(
+        self,
+        SrcRackLabel,
+        SrcRackID,
+        SrcRackType,
+        SrcPosStart,
+        SrcPosEnd,
+        DestRackLabel,
+        DestRackID,
+        DestRackType,
+        DestPosStart,
+        DestPosEnd,
+        Volume,
+        LiquidClass="",
+        NoOfDitiReuses=1,
+        NoOfMultiDisp=1,
+        Direction=0,
+        ExcludeDestWell="",
+    ):
+
+        self.SrcRackLabel = SrcRackLabel
+        self.SrcRackID = SrcRackID
+        self.SrcRackType = SrcRackType
+        self.SrcPosStart = str(SrcPosStart)
+        self.SrcPosEnd = str(SrcPosEnd)
+        self.DestRackLabel = DestRackLabel
+        self.DestRackID = DestRackID
+        self.DestRackType = DestRackType
+        self.DestPosStart = str(DestPosStart)
+        self.DestPosEnd = str(DestPosEnd)
+        self.Volume = str(Volume)
+        self.LiquidClass = LiquidClass
+        self.NoOfDitiReuses = str(NoOfDitiReuses)
+        self.NoOfMultiDisp = str(NoOfMultiDisp)
+        self.Direction = str(Direction)
+        self.ExcludeDestWell = ExcludeDestWell
+
+    def to_string(self):
+        parameters = [
+            self.SrcRackLabel,
+            self.SrcRackID,
+            self.SrcRackType,
+            self.SrcPosStart,
+            self.SrcPosEnd,
+            self.DestRackLabel,
+            self.DestRackID,
+            self.DestRackType,
+            self.DestPosStart,
+            self.DestPosEnd,
+            self.Volume,
+            self.LiquidClass,
+            self.NoOfDitiReuses,
+            self.NoOfMultiDisp,
+            self.Direction,
+            self.ExcludeDestWell,
+        ]
+        record_as_string = ";".join(parameters)
+
+        return record_as_string

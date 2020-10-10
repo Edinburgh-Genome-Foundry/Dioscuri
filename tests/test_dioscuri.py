@@ -42,6 +42,25 @@ def test_dioscuri():
     assert dioscuri.Comment("This is a comment").to_string() == "C;This is a comment"
     assert dioscuri.Comment("Multiline\ncomment").to_string() == "C;Multiline\\ncomment"
 
+    # REAGENT DISTRIBUTION
+    assert (
+        dioscuri.ReagentDistribution(
+            "SrcRackLabel",
+            "SrcRackID",
+            "SrcRackType",
+            "SrcPosStart",
+            "SrcPosEnd",
+            "DestRackLabel",
+            "DestRackID",
+            "DestRackType",
+            "DestPosStart",
+            "DestPosEnd",
+            "Volume",
+        ).to_string()
+        == "SrcRackLabel;SrcRackID;SrcRackType;SrcPosStart;SrcPosEnd;DestRackLabel;"
+        "DestRackID;DestRackType;DestPosStart;DestPosEnd;Volume;;1;1;0;"
+    )
+
     # WORKLIST
     dioscuri.GeminiWorkList()  # defaults
 
