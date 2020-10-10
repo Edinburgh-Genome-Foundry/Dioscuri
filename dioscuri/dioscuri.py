@@ -75,9 +75,13 @@ class GeminiWorkList:
         for record in self.records:
             records_as_string += record.to_string()
             records_as_string += "\n"
-            pass
 
         return records_as_string
+
+    def records_to_file(self, filename):
+        records_as_string = self.records_to_string()
+        with open(filename, "w", encoding="utf8") as f:
+            f.write(records_as_string)
 
 
 class Pipette:

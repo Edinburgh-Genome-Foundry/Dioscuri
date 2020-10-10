@@ -1,8 +1,9 @@
+import os
 import pytest
 import dioscuri
 
 
-def test_dioscuri():
+def test_dioscuri(tmpdir):
     # PIPETTE
     with pytest.raises(ValueError):
         dioscuri.Pipette(
@@ -84,3 +85,6 @@ def test_dioscuri():
         gwl_string == "A;Source1;;4ti-0960/B on raised carrier;3;;50;;;;\n"
         "D;Destination;;4ti-0960/B on CPAC;1;;50;;;;\nW2;\nW;\n"
     )
+
+    target_gwl = os.path.join(str(tmpdir), "test.gwl")
+    worklist.records_to_file(target_gwl)
