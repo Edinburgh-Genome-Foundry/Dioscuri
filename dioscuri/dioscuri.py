@@ -258,20 +258,40 @@ class SetDITIType:
     > The index of DiTi Type (`str`). Used to switch DiTi types from within a worklist.
     """
 
-    def __init__(self, DiTi_Index):
-        self.DiTi_Index = DiTi_Index
+    def __init__(self, diti_index):
+        self.diti_index = diti_index
         self.type_character = "S"
 
     def to_string(self):
         """Convert record into string representation."""
-        parameters = [self.type_character, self.DiTi_Index]
+        parameters = [self.type_character, self.diti_index]
         record_as_string = ";".join(parameters)
 
         return record_as_string
 
 
 class Comment:
-    pass
+    """The Comment record (ignored by Freedom EVOware).
+
+    **Parameters**
+
+    **comment**
+    > The comment (`str`). Newlines (`\n`) will be escaped with `\\`.
+    """
+
+    def __init__(self, comment):
+        if "\n" in comment:
+            self.comment = comment.replace("\n", "\\n")
+        else:
+            self.comment = comment
+        self.type_character = "C"
+
+    def to_string(self):
+        """Convert record into string representation."""
+        parameters = [self.type_character, self.comment]
+        record_as_string = ";".join(parameters)
+
+        return record_as_string
 
 
 class ReagentDistribution:

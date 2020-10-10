@@ -6,6 +6,7 @@ from .dioscuri import (
     Flush,
     Break,
     SetDITIType,
+    Comment,
 )
 
 from .version import __version__

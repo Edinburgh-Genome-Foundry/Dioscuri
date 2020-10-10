@@ -38,6 +38,10 @@ def test_dioscuri():
     # SET DITI TYPE
     assert dioscuri.SetDITIType("diti_index").to_string() == "S;diti_index"
 
+    # COMMENT
+    assert dioscuri.Comment("This is a comment").to_string() == "C;This is a comment"
+    assert dioscuri.Comment("Multiline\ncomment").to_string() == "C;Multiline\\ncomment"
+
     # WORKLIST
     dioscuri.GeminiWorkList()  # defaults
 
