@@ -32,6 +32,9 @@ def test_dioscuri():
     # FLUSH
     assert dioscuri.Flush().to_string() == "F;"
 
+    # BREAK
+    assert dioscuri.Break().to_string() == "B;"
+
     # WORKLIST
     dioscuri.GeminiWorkList()  # defaults
 
