@@ -53,6 +53,15 @@ class GeminiWorkList:
             ReagentDistribution,
         ]:
             raise AssertionError("Parameter `record` must be a record class.")
+
+        if type(record) is SetDITIType:
+            if len(self.records) != 0:
+                if type(self.records[-1]) != Break:
+                    raise ValueError(
+                        "The Set DiTi Type record can only be used at the very"
+                        " beginning of the worklist or directly after a Break record."
+                    )
+
         self.records.append(record)
 
     def list_records(self):
@@ -237,7 +246,28 @@ class Break:
 
 
 class SetDITIType:
-    pass
+    """The Set DiTi Type record.
+
+    The Set DiTi Type record can only be used at the very beginning of the worklist or
+    directly after a Break record.
+
+
+    **Parameters**
+
+    **DiTi_Index**
+    > The index of DiTi Type (`str`). Used to switch DiTi types from within a worklist.
+    """
+
+    def __init__(self, DiTi_Index):
+        self.DiTi_Index = DiTi_Index
+        self.type_character = "S"
+
+    def to_string(self):
+        """Convert record into string representation."""
+        parameters = [self.type_character, self.DiTi_Index]
+        record_as_string = ";".join(parameters)
+
+        return record_as_string
 
 
 class Comment:

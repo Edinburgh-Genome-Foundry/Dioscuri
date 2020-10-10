@@ -35,6 +35,9 @@ def test_dioscuri():
     # BREAK
     assert dioscuri.Break().to_string() == "B;"
 
+    # SET DITI TYPE
+    assert dioscuri.SetDITIType("diti_index").to_string() == "S;diti_index"
+
     # WORKLIST
     dioscuri.GeminiWorkList()  # defaults
 
@@ -44,6 +47,9 @@ def test_dioscuri():
 
     with pytest.raises(AssertionError):
         worklist.add_record("Not a dioscuri record class")
+
+    with pytest.raises(ValueError):
+        worklist.add_record(dioscuri.SetDITIType("diti_index"))
 
     worklist.add_record(dioscuri.WashTipOrReplaceDITI())
 

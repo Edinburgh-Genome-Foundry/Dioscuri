@@ -5,6 +5,7 @@ from .dioscuri import (
     Decontamination,
     Flush,
     Break,
+    SetDITIType,
 )
 
 from .version import __version__
