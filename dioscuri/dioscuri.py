@@ -7,6 +7,9 @@ different versioning for manual and software).
 DiTi is short for 'Disposable Tip'.
 """
 
+# The magic character semicolon (;) appearing throughout the script is used as
+# a separator and is specified by the gwl fileformat.
+
 
 class GeminiWorkList:
     """Gemini WorkList (gwl) class.
@@ -39,12 +42,15 @@ class GeminiWorkList:
         **record**
         > `Pipette`
         """
+        if not type(record) == Pipette:
+            raise AssertionError("Record type must be class Pipette.")
         self.records.append(record)
 
     def list_records(self):
+        record_list = []
         for record in self.records:
-            # call readable print of record
-            pass
+            record_list.append(record.type_character)
+        return record_list
 
     def records_to_string(self):
         records_as_string = ""
@@ -68,6 +74,7 @@ class Pipette:
 
     **operation**
     > The type of the transfer (`str`): `A` for aspirate, or `D` for dispense.
+    > The first letter of the specified string is used.
 
     **rack_label**
     > Label (`str`) which is assigned to the labware. Maximum 32 characters.
@@ -116,7 +123,10 @@ class Pipette:
         forced_rack_type="",
     ):
 
-        self.type_character = operation[0]
+        if not operation[0] in ["A", "D"]:
+            raise ValueError("Parameter `operation` must be one of 'A' or 'D'.")
+        else:
+            self.type_character = operation[0]
 
         # Parameters:
         self.rack_label = rack_label
