@@ -211,7 +211,16 @@ class Decontamination:
 
 
 class Flush:
-    pass
+    """The Flush record."""
+
+    def __init__(self):
+        self.type_character = "F"
+
+    def to_string(self):
+        """Convert record into string representation."""
+        record_as_string = self.type_character + ";"
+
+        return record_as_string
 
 
 class Break:

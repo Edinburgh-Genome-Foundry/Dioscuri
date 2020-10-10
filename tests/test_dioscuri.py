@@ -29,6 +29,9 @@ def test_dioscuri():
     # DECONTAMINATION
     assert dioscuri.Decontamination().to_string() == "WD;"
 
+    # FLUSH
+    assert dioscuri.Flush().to_string() == "F;"
+
     # WORKLIST
     dioscuri.GeminiWorkList()  # defaults
 
