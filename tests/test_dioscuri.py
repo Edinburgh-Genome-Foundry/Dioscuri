@@ -44,6 +44,10 @@ def test_dioscuri(tmpdir):
 
     assert worklist.list_records() == ["A", "D", "W", "W"]
 
+    worklist.add_record(dioscuri.WashTipOrReplaceDITI(scheme=1))
+    worklist.add_record(dioscuri.WashTipOrReplaceDITI(scheme=3))
+    worklist.add_record(dioscuri.WashTipOrReplaceDITI(scheme=4))
+
     # DECONTAMINATION
     decontaminate = dioscuri.Decontamination()
     assert decontaminate.to_string() == "WD;"
@@ -98,7 +102,7 @@ def test_dioscuri(tmpdir):
     assert (
         gwl_string
         == "A;Source1;;4ti-0960/B on raised carrier;3;;50;;;;\nD;Destination;;"
-        "4ti-0960/B on CPAC;1;;50;;;;\nW2;\nW;\nWD;\nF;\nB;\nS;diti_index\nC;"
+        "4ti-0960/B on CPAC;1;;50;;;;\nW2;\nW;\nW1;\nW3;\nW4;\nWD;\nF;\nB;\nS;diti_index\nC;"
         "Multiline\\ncomment\nR;SrcRackLabel;SrcRackID;SrcRackType;SrcPosStart;"
         "SrcPosEnd;DestRackLabel;DestRackID;DestRackType;DestPosStart;DestPosEnd;"
         "Volume;;1;1;0;\n"
@@ -107,8 +111,9 @@ def test_dioscuri(tmpdir):
     target_gwl = os.path.join(str(tmpdir), "test.gwl")
     worklist.records_to_file(target_gwl)
 
+    dioscuri.read_gwl(target_gwl)  # return without error
+
     with open(target_gwl, "a") as f:
         f.write("XYZ;appended text")  # testing invalid records
-
     with pytest.raises(ValueError):
         dioscuri.read_gwl(target_gwl)
