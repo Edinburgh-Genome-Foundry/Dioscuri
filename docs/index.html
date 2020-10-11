@@ -425,7 +425,7 @@
                 
                 
                 <p align="center">
-<img alt="Dioscuri logo" title="Dioscuri" src="https://raw.githubusercontent.com/Edinburgh-Genome-Foundry/Dioscuri/main/images/Dioscuri.png" width="140">
+<img alt="Dioscuri logo" title="Dioscuri" src="https://raw.githubusercontent.com/Edinburgh-Genome-Foundry/Dioscuri/main/images/Dioscuri.png" width="120">
 </p>
 
 <h1 id="dioscuri">Dioscuri</h1>
@@ -468,9 +468,13 @@
 </code></pre></div>
 
 
-<p>The generated string can be saved in a text file:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;picklist.gwl&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">worklist</span><span class="o">.</span><span class="n">records_to_string</span><span class="p">())</span>
+<p>The worklist can be saved in a text file:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">worklist</span><span class="o">.</span><span class="n">records_to_file</span><span class="p">(</span><span class="s2">&quot;picklist.gwl&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>A gwl file can also be read into a worklist:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">worklist</span> <span class="o">=</span> <span class="n">dioscuri</span><span class="o">.</span><span class="n">read_gwl</span><span class="p">(</span><span class="s2">&quot;picklist.gwl&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 

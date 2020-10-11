@@ -1,5 +1,5 @@
 <p align="center">
-<img alt="Dioscuri logo" title="Dioscuri" src="https://raw.githubusercontent.com/Edinburgh-Genome-Foundry/Dioscuri/main/images/Dioscuri.png" width="140">
+<img alt="Dioscuri logo" title="Dioscuri" src="https://raw.githubusercontent.com/Edinburgh-Genome-Foundry/Dioscuri/main/images/Dioscuri.png" width="120">
 </p>
 
 
@@ -52,11 +52,14 @@ print(worklist.records_to_string())
 # W;
 ```
 
-The generated string can be saved in a text file:
-
+The worklist can be saved in a text file:
 ```python
-with open("picklist.gwl", "w", encoding='utf8') as f:
-    f.write(worklist.records_to_string())
+worklist.records_to_file("picklist.gwl")
+```
+
+A gwl file can also be read into a worklist:
+```python
+worklist = dioscuri.read_gwl("picklist.gwl")
 ```
 
 
