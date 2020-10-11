@@ -8,6 +8,7 @@ from .dioscuri import (
     SetDITIType,
     Comment,
     ReagentDistribution,
+    read_gwl,
 )
 
 from .version import __version__

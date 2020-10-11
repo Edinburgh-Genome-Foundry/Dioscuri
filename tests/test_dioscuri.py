@@ -27,41 +27,6 @@ def test_dioscuri(tmpdir):
         dioscuri.WashTipOrReplaceDITI(scheme=5)  # should be between 1--4
     wash = dioscuri.WashTipOrReplaceDITI(scheme=2)
 
-    # DECONTAMINATION
-    assert dioscuri.Decontamination().to_string() == "WD;"
-
-    # FLUSH
-    assert dioscuri.Flush().to_string() == "F;"
-
-    # BREAK
-    assert dioscuri.Break().to_string() == "B;"
-
-    # SET DITI TYPE
-    assert dioscuri.SetDITIType("diti_index").to_string() == "S;diti_index"
-
-    # COMMENT
-    assert dioscuri.Comment("This is a comment").to_string() == "C;This is a comment"
-    assert dioscuri.Comment("Multiline\ncomment").to_string() == "C;Multiline\\ncomment"
-
-    # REAGENT DISTRIBUTION
-    assert (
-        dioscuri.ReagentDistribution(
-            "SrcRackLabel",
-            "SrcRackID",
-            "SrcRackType",
-            "SrcPosStart",
-            "SrcPosEnd",
-            "DestRackLabel",
-            "DestRackID",
-            "DestRackType",
-            "DestPosStart",
-            "DestPosEnd",
-            "Volume",
-        ).to_string()
-        == "SrcRackLabel;SrcRackID;SrcRackType;SrcPosStart;SrcPosEnd;DestRackLabel;"
-        "DestRackID;DestRackType;DestPosStart;DestPosEnd;Volume;;1;1;0;"
-    )
-
     # WORKLIST
     dioscuri.GeminiWorkList()  # defaults
 
@@ -79,12 +44,71 @@ def test_dioscuri(tmpdir):
 
     assert worklist.list_records() == ["A", "D", "W", "W"]
 
+    # DECONTAMINATION
+    decontaminate = dioscuri.Decontamination()
+    assert decontaminate.to_string() == "WD;"
+    worklist.add_record(decontaminate)
+
+    # FLUSH
+    flush = dioscuri.Flush()
+    assert flush.to_string() == "F;"
+    worklist.add_record(flush)
+
+    # BREAK
+    break_record = dioscuri.Break()
+    assert break_record.to_string() == "B;"
+    worklist.add_record(break_record)
+
+    # SET DITI TYPE
+    set_diti_type = dioscuri.SetDITIType("diti_index")
+    assert set_diti_type.to_string() == "S;diti_index"
+    worklist.add_record(set_diti_type)
+
+    # COMMENT
+    assert dioscuri.Comment("This is a comment").to_string() == "C;This is a comment"
+    comment = dioscuri.Comment("Multiline\ncomment")
+    assert comment.to_string() == "C;Multiline\\ncomment"
+    worklist.add_record(comment)
+
+    # REAGENT DISTRIBUTION
+    reagent_dist = dioscuri.ReagentDistribution(
+        "SrcRackLabel",
+        "SrcRackID",
+        "SrcRackType",
+        "SrcPosStart",
+        "SrcPosEnd",
+        "DestRackLabel",
+        "DestRackID",
+        "DestRackType",
+        "DestPosStart",
+        "DestPosEnd",
+        "Volume",
+    )
+    expected_string = (
+        "R;SrcRackLabel;SrcRackID;SrcRackType;"
+        "SrcPosStart;SrcPosEnd;DestRackLabel;DestRackID;DestRackType;DestPosStart;"
+        "DestPosEnd;Volume;;1;1;0;"
+    )
+    assert reagent_dist.to_string() == expected_string
+
+    worklist.add_record(reagent_dist)
+
     gwl_string = worklist.records_to_string()
 
     assert (
-        gwl_string == "A;Source1;;4ti-0960/B on raised carrier;3;;50;;;;\n"
-        "D;Destination;;4ti-0960/B on CPAC;1;;50;;;;\nW2;\nW;\n"
+        gwl_string
+        == "A;Source1;;4ti-0960/B on raised carrier;3;;50;;;;\nD;Destination;;"
+        "4ti-0960/B on CPAC;1;;50;;;;\nW2;\nW;\nWD;\nF;\nB;\nS;diti_index\nC;"
+        "Multiline\\ncomment\nR;SrcRackLabel;SrcRackID;SrcRackType;SrcPosStart;"
+        "SrcPosEnd;DestRackLabel;DestRackID;DestRackType;DestPosStart;DestPosEnd;"
+        "Volume;;1;1;0;\n"
     )
 
     target_gwl = os.path.join(str(tmpdir), "test.gwl")
     worklist.records_to_file(target_gwl)
+
+    with open(target_gwl, "a") as f:
+        f.write("XYZ;appended text")  # testing invalid records
+
+    with pytest.raises(ValueError):
+        dioscuri.read_gwl(target_gwl)

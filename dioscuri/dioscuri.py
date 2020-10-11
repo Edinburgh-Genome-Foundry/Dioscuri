@@ -11,6 +11,57 @@ DiTi is short for 'Disposable Tip'.
 # a separator and is specified by the gwl fileformat.
 
 
+def read_gwl(filepath):
+    worklist = GeminiWorkList()
+
+    with open(filepath) as f:
+        records_as_strings = f.read().splitlines()  # read txt lines
+    for record_as_string in records_as_strings:
+        entries = record_as_string.split(";")
+        if entries[0] == "A" or entries[0] == "D":
+            record = Pipette(
+                operation=entries[0],
+                rack_label=entries[1],
+                rack_id=entries[2],
+                rack_type=entries[3],
+                position=entries[4],
+                tube_id=entries[5],
+                volume=entries[6],
+                liquid_class=entries[7],
+                # tip_type is entry #8
+                tip_mask=entries[9],
+                forced_rack_type=entries[10],
+            )
+        elif entries[0] == "W":
+            record = WashTipOrReplaceDITI()
+        elif entries[0] == "W1":
+            record = WashTipOrReplaceDITI(scheme=1)
+        elif entries[0] == "W2":
+            record = WashTipOrReplaceDITI(scheme=2)
+        elif entries[0] == "W3":
+            record = WashTipOrReplaceDITI(scheme=3)
+        elif entries[0] == "W4":
+            record = WashTipOrReplaceDITI(scheme=4)
+        elif entries[0] == "WD":
+            record = Decontamination()
+        elif entries[0] == "F":
+            record = Flush()
+        elif entries[0] == "B":
+            record = Break()
+        elif entries[0] == "S":
+            record = SetDITIType(*entries[1:])  # first one is the record type
+        elif entries[0] == "C":
+            record = Comment(*entries[1:])
+        elif entries[0] == "R":
+            record = ReagentDistribution(*entries[1:])
+        else:
+            raise ValueError("Entry `%s` is not a valid record type." % entries[0])
+
+        worklist.add_record(record)
+
+    return worklist
+
+
 class GeminiWorkList:
     """Gemini WorkList (gwl) class.
 
@@ -164,6 +215,7 @@ class Pipette:
         self.tip_type = ""  # Reserved, must be omitted.
 
     def to_string(self):
+        # Order is important:
         parameters = [
             self.type_character,
             self.rack_label,
@@ -380,6 +432,7 @@ class ReagentDistribution:
         Direction=0,
         ExcludeDestWell="",
     ):
+        self.type_character = "R"
 
         self.SrcRackLabel = SrcRackLabel
         self.SrcRackID = SrcRackID
@@ -399,7 +452,9 @@ class ReagentDistribution:
         self.ExcludeDestWell = ExcludeDestWell
 
     def to_string(self):
+        # Order is important:
         parameters = [
+            self.type_character,
             self.SrcRackLabel,
             self.SrcRackID,
             self.SrcRackType,
