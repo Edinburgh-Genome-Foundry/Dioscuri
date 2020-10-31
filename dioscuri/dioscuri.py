@@ -15,10 +15,17 @@ DiTi is short for 'Disposable Tip'.
 
 
 def read_gwl(filepath):
+    """Read gwl file into a GeminiWorkList object.
+
+
+    **Parameters**
+
+    **filepath**
+    > Path to the gwl file (`str`)."""
     worklist = GeminiWorkList()
 
-    with open(filepath) as f:
-        records_as_strings = f.read().splitlines()  # read txt lines
+    with open(filepath) as gwl_file:
+        records_as_strings = gwl_file.read().splitlines()  # read txt lines
     for record_as_string in records_as_strings:
         entries = record_as_string.split(";")
         if entries[0] == "A" or entries[0] == "D":
@@ -108,9 +115,9 @@ class GeminiWorkList:
         ]:
             raise AssertionError("Parameter `record` must be a record class.")
 
-        if type(record) is SetDITIType:
+        if isinstance(record, SetDITIType):
             if len(self.records) != 0:
-                if type(self.records[-1]) != Break:
+                if not isinstance(self.records[-1], Break):
                     raise ValueError(
                         "The Set DiTi Type record can only be used at the very"
                         " beginning of the worklist or directly after a Break record."
@@ -119,12 +126,14 @@ class GeminiWorkList:
         self.records.append(record)
 
     def list_records(self):
+        """List records in a worklist."""
         record_list = []
         for record in self.records:
             record_list.append(record.type_character)
         return record_list
 
     def records_to_string(self):
+        """Return string representation of the records."""
         records_as_string = ""
         for record in self.records:
             records_as_string += record.to_string()
@@ -133,9 +142,17 @@ class GeminiWorkList:
         return records_as_string
 
     def records_to_file(self, filename):
+        """Print records into a gwl file.
+
+
+        **Parameters**
+
+        **filename**
+        > Path to the target gwl file (`str`).
+        """
         records_as_string = self.records_to_string()
-        with open(filename, "w", encoding="utf8") as f:
-            f.write(records_as_string)
+        with open(filename, "w", encoding="utf8") as target_file:
+            target_file.write(records_as_string)
 
 
 class Pipette:
@@ -199,8 +216,7 @@ class Pipette:
 
         if not operation[0] in ["A", "D"]:
             raise ValueError("Parameter `operation` must be one of 'A' or 'D'.")
-        else:
-            self.type_character = operation[0]
+        self.type_character = operation[0]
 
         # Parameters:
         self.rack_label = rack_label
@@ -216,6 +232,7 @@ class Pipette:
         self.tip_type = ""  # Reserved, must be omitted.
 
     def to_string(self):
+        """Return string representation of the record."""
         # Order is important:
         parameters = [
             self.type_character,
@@ -257,7 +274,7 @@ class WashTipOrReplaceDITI:
         self.type_character = "W"
 
     def to_string(self):
-        """Convert record into string representation."""
+        """Return string representation of the record."""
         record_as_string = self.type_character + self.scheme + ";"
 
         return record_as_string
@@ -270,7 +287,7 @@ class Decontamination:
         self.type_character = "WD"
 
     def to_string(self):
-        """Convert record into string representation."""
+        """Return string representation of the record."""
         record_as_string = self.type_character + ";"
 
         return record_as_string
@@ -283,7 +300,7 @@ class Flush:
         self.type_character = "F"
 
     def to_string(self):
-        """Convert record into string representation."""
+        """Return string representation of the record."""
         record_as_string = self.type_character + ";"
 
         return record_as_string
@@ -296,7 +313,7 @@ class Break:
         self.type_character = "B"
 
     def to_string(self):
-        """Convert record into string representation."""
+        """Return string representation of the record."""
         record_as_string = self.type_character + ";"
 
         return record_as_string
@@ -320,7 +337,7 @@ class SetDITIType:
         self.type_character = "S"
 
     def to_string(self):
-        """Convert record into string representation."""
+        """Return string representation of the record."""
         parameters = [self.type_character, self.diti_index]
         record_as_string = ";".join(parameters)
 
@@ -330,10 +347,11 @@ class SetDITIType:
 class Comment:
     """The Comment record (ignored by Freedom EVOware).
 
+
     **Parameters**
 
     **comment**
-    > The comment (`str`). Newlines (`\\n`) will be escaped with `\`.
+    > The comment (`str`). Newlines (`\\n`) will be escaped with `\\`.
     """
 
     def __init__(self, comment):
@@ -344,7 +362,7 @@ class Comment:
         self.type_character = "C"
 
     def to_string(self):
-        """Convert record into string representation."""
+        """Return string representation of the record."""
         parameters = [self.type_character, self.comment]
         record_as_string = ";".join(parameters)
 
@@ -453,6 +471,7 @@ class ReagentDistribution:
         self.ExcludeDestWell = ExcludeDestWell
 
     def to_string(self):
+        """Return string representation of the record."""
         # Order is important:
         parameters = [
             self.type_character,
