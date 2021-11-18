@@ -4,8 +4,7 @@
 
 
 # Dioscuri
-
-[![Build Status](https://travis-ci.org/Edinburgh-Genome-Foundry/Dioscuri.svg?branch=main)](https://travis-ci.org/Edinburgh-Genome-Foundry/Dioscuri)
+[![Build Status](https://app.travis-ci.com/Edinburgh-Genome-Foundry/Dioscuri.svg?branch=main)](https://app.travis-ci.com/Edinburgh-Genome-Foundry/Dioscuri)
 [![Coverage Status](https://coveralls.io/repos/github/Edinburgh-Genome-Foundry/Dioscuri/badge.svg?branch=main)](https://coveralls.io/github/Edinburgh-Genome-Foundry/Dioscuri?branch=main)
 
 Dioscuri is a Python package for working with **Gemini WorkList** (gwl) files and objects.
