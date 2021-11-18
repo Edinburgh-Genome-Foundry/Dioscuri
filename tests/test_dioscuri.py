@@ -21,6 +21,13 @@ def test_dioscuri(tmpdir):
 
     dispense = dioscuri.Pipette("D", "Destination", "4ti-0960/B on CPAC", "1", "50")
 
+    # Test a case where the source plate label (`rack_label`) is a number, not text:
+    rack_label = 42
+    aspirate2 = dioscuri.Pipette(
+        "Aspirate", rack_label, "4ti-0960/B on raised carrier", "3", "50"
+    )
+    aspirate2.to_string()
+
     # WASH
     assert dioscuri.WashTipOrReplaceDITI().to_string() == "W;"
     with pytest.raises(ValueError):

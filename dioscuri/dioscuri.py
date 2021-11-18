@@ -239,15 +239,15 @@ class Pipette:
             self.rack_label,
             self.rack_id,
             self.rack_type,
-            str(self.position),
+            self.position,
             self.tube_id,
-            str(self.volume),
+            self.volume,
             self.liquid_class,
             self.tip_type,
             self.tip_mask,
             self.forced_rack_type,
         ]
-        record_as_string = ";".join(parameters)
+        record_as_string = ";".join(str(param) for param in parameters)
 
         return record_as_string
 
@@ -339,7 +339,7 @@ class SetDITIType:
     def to_string(self):
         """Return string representation of the record."""
         parameters = [self.type_character, self.diti_index]
-        record_as_string = ";".join(parameters)
+        record_as_string = ";".join(str(param) for param in parameters)
 
         return record_as_string
 
@@ -364,7 +364,7 @@ class Comment:
     def to_string(self):
         """Return string representation of the record."""
         parameters = [self.type_character, self.comment]
-        record_as_string = ";".join(parameters)
+        record_as_string = ";".join(str(param) for param in parameters)
 
         return record_as_string
 
@@ -492,6 +492,6 @@ class ReagentDistribution:
             self.Direction,
             self.ExcludeDestWell,
         ]
-        record_as_string = ";".join(parameters)
+        record_as_string = ";".join(str(param) for param in parameters)
 
         return record_as_string
